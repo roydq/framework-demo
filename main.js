@@ -3,6 +3,9 @@ var http = require('http');
 var framework = require('thinger');
 var config = require('./config.js');
 
+// Autoload controllers
+framework.core.toolbox.loadControllers('./controllers'); 
+
 // Get router
 var router = new framework.core.routing.router(config);
 
@@ -13,4 +16,3 @@ http.createServer(function (req, res) {
 }).listen(1337, "127.0.0.1");
 
 console.log('Server running at http://127.0.0.1:1337/');
-
