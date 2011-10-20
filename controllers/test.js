@@ -1,8 +1,11 @@
-var framework = require('thinger');
-var controller = new framework.base.app.controller();
+var Framework = require('framework');
+var controller = new Framework.Base.Controller();
 
-controller.test = function (context) {
- 
-});
+controller.index = function (context) {
+	context.res.write('Hello World!'); 
+};
+controller.crap = function (context) {
+	context.res.write('Crap!'); 
+};
 
-exports.controller = controller;
+exports.Instance = controller;

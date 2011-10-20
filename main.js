@@ -1,18 +1,21 @@
 // Includes
 var http = require('http');
-var framework = require('thinger');
-var config = require('./config.js');
+var Framework = require('framework');
 
-// Autoload controllers
-framework.core.toolbox.loadControllers('./controllers'); 
+// Config
+var routerConfig = require('./config.js');
+
+// Load controller (need to automate this)
+var controller = require('./controllers/test.js').Instance;
+routerConfig.controllers = {test: controller};
 
 // Get router
-var router = new framework.core.routing.router(config);
+var router = new Framework.Core.Router(routerConfig);
 
-// Start server
-http.createServer(function (req, res) {
-	router.dispatch(req, res);
-	res.end();
-}).listen(1337, "127.0.0.1");
+// Get server
+var server = new Framework.Core.Http.Server({
+	http : http,
+	router : router
+});
 
-console.log('Server running at http://127.0.0.1:1337/');
+server.start("127.0.0.1", 1337);
